@@ -1,21 +1,12 @@
 import { FC, Suspense } from "react";
 import { AxiosErrorBoundary } from "../ErrorBoundary/AxiosErrorBoundary";
+import { TableBodyLoading } from "../SuspenseFallBack/TableBodyLoading";
 import { TableContent } from "./Content";
-
-const SuspenseFallBack = () => {
-  return (
-    <tr>
-      <td colSpan={2}>
-        <span>Loading...</span>
-      </td>
-    </tr>
-  );
-};
 
 export const TableBody: FC = () => {
   return (
     <tbody>
-      <Suspense fallback={<SuspenseFallBack />}>
+      <Suspense fallback={<TableBodyLoading />}>
         <AxiosErrorBoundary>
           <TableContent />
         </AxiosErrorBoundary>

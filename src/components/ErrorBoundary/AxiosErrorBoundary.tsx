@@ -7,6 +7,8 @@ type Props = {
 };
 
 const ErrorBoundaryFallBack: FC<FallbackProps> = ({ error }) => {
+  console.log(error);
+
   if (axios.isAxiosError(error)) {
     return (
       <tr>

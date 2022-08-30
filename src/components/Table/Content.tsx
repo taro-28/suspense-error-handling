@@ -1,6 +1,6 @@
-import axios from "axios";
 import { FC } from "react";
 import useSWR from "swr";
+import { api } from "../../apiConfig";
 import { TableRow } from "./Row";
 
 function getRandomInt(max: number) {
@@ -40,19 +40,19 @@ const fetchPeople = async () => {
   return data;
 };
 
-const axiosFetch = () =>
-  axios.get("https://hoge.com").then((res) => {
-    console.log("Success", res);
+const axiosFetch = () => api.get("people").then((res) => people);
+
+const planeFetch = () =>
+  fetch("/movies.json").then((res) => {
+    console.log(res);
     return people;
   });
 
 export const TableContent: FC = () => {
   // const { data: people } = useSWR("data", fetchPeople, { suspense: true });
-  const { data: people, error } = useSWR("data", axiosFetch, {
+  const { data: people } = useSWR("data", planeFetch, {
     suspense: true,
   });
-
-  console.log("error", error);
 
   return (
     <>
