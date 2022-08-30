@@ -1,6 +1,5 @@
-import axios from "axios";
 import { FC, Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { AxiosErrorBoundary } from "../ErrorBoundary/AxiosErrorBoundary";
 import { TableContent } from "./Content";
 
 const SuspenseFallBack = () => {
@@ -13,31 +12,13 @@ const SuspenseFallBack = () => {
   );
 };
 
-const ErrorBoundaryFallBack = () => {
-  return (
-    <tr>
-      <td colSpan={2}>
-        <span>サーバーエラーが発生しました</span>
-      </td>
-    </tr>
-  );
-};
-
 export const TableBody: FC = () => {
   return (
     <tbody>
       <Suspense fallback={<SuspenseFallBack />}>
-        <ErrorBoundary
-          fallbackRender={(error) => {
-            console.log(error);
-            if (axios.isAxiosError(error)) {
-              return <ErrorBoundaryFallBack />;
-            }
-            return <>Other Error</>;
-          }}
-        >
+        <AxiosErrorBoundary>
           <TableContent />
-        </ErrorBoundary>
+        </AxiosErrorBoundary>
       </Suspense>
     </tbody>
   );

@@ -1,11 +1,14 @@
+import { RootErrorBoundary } from "./components/ErrorBoundary/RootBoundary";
 import { Table } from "./components/Table";
 import "./index.css";
 
 function App() {
   return (
-    <div>
-      <Table />
-    </div>
+    <RootErrorBoundary>
+      <div>
+        <Table title="Suspense" />
+      </div>
+    </RootErrorBoundary>
   );
 }
 
